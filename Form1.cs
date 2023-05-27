@@ -19,9 +19,14 @@ namespace DrunkManGame
 
         public Form1()
         {
+
             InitializeComponent();
+            //WindowState = FormWindowState.Maximized;
+          
+
             game = new Game(new List<Gamer> { new Gamer("Ostap"), new Gamer("Bohdan") },36);
             ShowDeck();
+
         }
 
 
@@ -30,9 +35,9 @@ namespace DrunkManGame
             foreach (Card card in game.deck)
             {
                 Controls.Add(card);
-               
-                card.Location = new Point(ClientSize.Width/2, ClientSize.Height/2);
-                
+                card.Left = (this.ClientSize.Width - card.Width) / 2;
+                card.Top = (this.ClientSize.Height - card.Height) / 2;
+                card.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
 
             }
         }
