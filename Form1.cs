@@ -15,19 +15,26 @@ namespace DrunkManGame
         Card card = new Card(Card.Values52[6], Card.Suits["spades"], 6);
         Timer myTimer = new Timer();
         int counter = 1;
+        Game game;
 
         public Form1()
         {
             InitializeComponent();
-            var card = new PictureBox();
-            card.BackgroundImage = Properties.Resources._2_of_spades;
-            card.Width = 100;
-            card.Height = 250;
-            card.BackgroundImageLayout = ImageLayout.Zoom;
-            Controls.Add(card);
-            myTimer.Interval = 100;
-            myTimer.Tick += (object sender, EventArgs e) => { card.Location = new Point(counter++, counter++);}; 
-            myTimer.Start();
+            game = new Game(new List<Gamer> { new Gamer("Ostap"), new Gamer("Bohdan") },36);
+            ShowDeck();
+        }
+
+
+        public void ShowDeck()
+        {
+            foreach (Card card in game.deck)
+            {
+                Controls.Add(card);
+               
+                card.Location = new Point(ClientSize.Width/2, ClientSize.Height/2);
+                
+
+            }
         }
 
     }

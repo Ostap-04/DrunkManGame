@@ -8,38 +8,28 @@ namespace DrunkManGame
 {
     public class Game
     {
-        /*
-         while cnt < val:
-            if every user is not empty(users list):
-                1.take card from every user(stepCards)
-                2.{
-                    getCardWithLowestPrior(cards list)
-                    getCardWithHighestPrior(cards list)
-                    if lowestPriorCard == 6 && highestPriorCard == 14:
-                        (users list)[cards list.index(lowestPriorCard)].set += stepCards
-                    else:
-                        if cards list has the same cards:
-                            getUsersWithEqualCards()
-                            war(users with equal cards, step cards)
-                        i = (user in users list with highestPirorCard).index
-                        user_i.set += stepcards
-                        
-                }
+        public List<Gamer> gamers;
+        public Deck deck;
+       
+
+        public Game (List <Gamer> gamers ,int deckSize)
+        {
+            deck = new Deck(deckSize);
+            gamers = new List<Gamer>();
+            deck.Shuffle();
            
-            else if at least one user empty(users list):
-                remove empty users from list 
-            
-         */
+        }
+
         public void StartGame(List<Gamer> players, int stepsPrediction, int deckSize = 36)
         {
             Console.WriteLine("\n *** Start game *** \n");
             if (deckSize != 52 && deckSize != 36)
                 return;
 
-            Deck deck = new Deck(deckSize);
-            deck.Shuffle();
+           
+        
             int lowestPrior = deckSize == 36 ? 6 : 2;
-            List<Gamer> gamers = new List<Gamer>();
+             
 
             foreach (Gamer gamer in players)
                 gamers.Add(new Gamer(gamer));
