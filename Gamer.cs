@@ -36,6 +36,7 @@ namespace DrunkManGame
         public Card GiveCard()
         {
             Card returnCard = Set[Set.Count - 1];
+            returnCard.IsBack = false;
             Set.Remove(returnCard);
             return returnCard;
         }
