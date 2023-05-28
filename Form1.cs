@@ -21,7 +21,7 @@ namespace DrunkManGame
         {
 
             InitializeComponent();
-            WindowState = FormWindowState.Maximized;
+            //WindowState = FormWindowState.Maximized;
           
 
             game = new Game(new List<Gamer> { new Gamer("Ostap"), new Gamer("Bohdan") },36);
@@ -37,9 +37,7 @@ namespace DrunkManGame
                 Controls.Add(card);
                 card.Left = (this.ClientSize.Width - card.Width) / 2;
                 card.Top = (this.ClientSize.Height - card.Height) / 2;
-                //card.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
                 card.Anchor = AnchorStyles.None;
-
             }
         }
 
