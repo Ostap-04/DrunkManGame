@@ -19,8 +19,7 @@ namespace DrunkManGame
         {
             InitializeComponent();
             rules.Text = "lllalllalalallala";
-            //WindowState = FormWindowState.Maximized;
-            game = new Game(new List<Gamer> { new Gamer(gamerNameInput1.Text), new Gamer(gamerNameInput2.Text) }, 36);
+            game = new Game(new List<Gamer> { new Gamer(gamerNameInput1.Text), new Gamer(gamerNameInput2.Text) }, cards36.Checked ? 36 : 52, (int)predictionVal.Value);
             indexCard = game.deck.deck.Count - 1;
         }
 
@@ -88,7 +87,9 @@ namespace DrunkManGame
                         card.Location = new Point(x, card.Location.Y - 1);
                 }
                 else
+                {
                     timerMove.Stop();
+                }
             };
             timerMove.Start();
         }
@@ -97,11 +98,10 @@ namespace DrunkManGame
         {
             ShowDeck();
             btnDistribute.Visible = true;
-            playerData.Visible = false;
+            gameSettings.Visible = false;
             rules.Visible = false;
             start.Visible = false;
             gameTitle.Visible = false;
-            prediction.Visible = false;
             nickname1.Visible = true;
             nickname2.Visible = true;
             nickname1.Text += " " + gamerNameInput1.Text;

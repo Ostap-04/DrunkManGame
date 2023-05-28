@@ -10,17 +10,20 @@ namespace DrunkManGame
     {
         public List<Gamer> gamers;
         public Deck deck;
-
-        public Game (List <Gamer> _gamers ,int deckSize)
+        public int deckSize;
+        public int stepsPrediction;
+        public Game (List <Gamer> _gamers, int _deckSize, int _stepsPrediction)
         {
+            deckSize = _deckSize;
             deck = new Deck(deckSize);
-            foreach (Gamer gamer in _gamers)
-                gamers.Add(new Gamer(gamer));
+            stepsPrediction = _stepsPrediction;
+            //foreach (Gamer gamer in _gamers)
+            //    gamers.Add(new Gamer(gamer));
 
             deck.Shuffle();
         }
 
-        public void StartGame(List<Gamer> players, int stepsPrediction, int deckSize = 36)
+        public void StartGame(List<Gamer> players)
         {
 
             int lowestPrior = deckSize == 36 ? 6 : 2;

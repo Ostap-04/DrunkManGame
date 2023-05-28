@@ -14,7 +14,6 @@ namespace DrunkManGame
         public string Suit { get; set; }
         public int Priority { get; set; }
 
-
         public bool IsBack { get; set; } = true;
 
         public Bitmap Background { get; set; }
