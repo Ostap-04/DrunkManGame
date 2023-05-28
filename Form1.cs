@@ -54,6 +54,7 @@ namespace DrunkManGame
             if (indexCard < 0)
             {
                 TimerDistirbute.Stop();
+                game.deck.Distribute(game.gamers);  // роздаєм карти гравцям
                 return;
             }
 
@@ -110,7 +111,7 @@ namespace DrunkManGame
 
         private void step_Click(object sender, EventArgs e)
         {
-
+           
         }
     }
 }
