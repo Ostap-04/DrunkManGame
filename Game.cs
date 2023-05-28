@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+
 
 namespace DrunkManGame
 {
@@ -24,7 +28,7 @@ namespace DrunkManGame
             gamers = _gamers;
             deck.Shuffle();
         }
-        public bool Step()
+        public bool Step(int clientWidth, int clientHeight)
         {
             count++;
             if (gamers.Count == 1)
@@ -36,7 +40,14 @@ namespace DrunkManGame
             {
                 List<Card> stepSet = new List<Card>();
                 foreach (Gamer gamer in gamers)
-                    stepSet.Add(gamer.GiveCard());
+                {
+                    Card tempCard = gamer.GiveCard();
+                    Card.AddBackImage(tempCard);
+                    stepSet.Add(tempCard);
+                }
+                StepMove(stepSet, clientWidth, clientHeight);
+                
+
 
                 Card MaxCard = GetCardWithHighestPrior(stepSet);
                 Card MinCard = GetCardWithLowestPrior(stepSet);
@@ -47,6 +58,7 @@ namespace DrunkManGame
                     Gamer stepWinner = gamers[stepSet.FindIndex(card => card == MinCard)];
                     foreach (Card card in stepSet)
                         stepWinner.Set.Insert(0, card);
+                    //EndMove(stepSet, clientWidth, clientHeight);
                 }
                 else if (sameCards.Count != 0 && sameCards.Contains(MaxCard))
                 {
@@ -58,6 +70,7 @@ namespace DrunkManGame
                     Gamer stepWinner = gamers[stepSet.FindIndex(card => card == MaxCard)];
                     foreach (Card card in stepSet)
                         stepWinner.Set.Insert(0, card);
+                    //EndMove(stepSet, MaxCard, clientWidth, clientHeight);
                 }
             }
             else
@@ -66,6 +79,76 @@ namespace DrunkManGame
             }
             return gameEnded;
         }
+
+        private void StepMove(List<Card> cards, int clientWidth, int clientHeight)
+        {
+            Timer timerMove = new Timer();
+            timerMove.Interval = 14;
+            timerMove.Tick += (object sender, EventArgs e) =>
+            {
+                foreach(Card card in cards)
+                {
+                    if (card.Location.Y > clientHeight / 2 - card.Height / 2)
+                    {
+                        card.Location = new Point(card.Location.X + 1, card.Location.Y - 4);
+                    }
+                    else if (card.Location.Y < clientHeight / 2 - card.Height / 2)
+                    {
+                        card.Location = new Point(card.Location.X - 1, card.Location.Y + 4);
+                    }
+                    else if (card.Location.Y < (clientHeight + card.Height) / 2 && card.Location.Y > (clientHeight - card.Height) / 2)
+                    {
+                        //timerMove.Stop();
+                    }
+                }
+                
+            };
+            timerMove.Start();
+        }
+
+        private void EndMove(List<Card> cards, Card maxCard, int clientWidth, int clientHeight)
+        {
+            Timer timerMove = new Timer();
+            timerMove.Interval = 14;
+            int counter = 0;
+            timerMove.Tick += (object sender, EventArgs e) =>
+            {
+                if (maxCard.Location.X < clientWidth / 2)
+                {
+                    foreach(Card card in cards)
+                    {
+                        if (card.Location.X < clientWidth / 2)
+                        {
+                            card.Location = new Point(card.Location.X + 1, card.Location.Y - 4);
+                        }
+                        if (card.Location.X > clientWidth / 2)
+                        {
+                            card.Location = new Point(card.Location.X - 1, card.Location.Y - 4);
+                        }
+                    }
+                }
+                else if (maxCard.Location.X > clientWidth / 2)
+                {
+                    foreach (Card card in cards)
+                    {
+                        if (card.Location.X < clientWidth / 2)
+                        {
+                            card.Location = new Point(card.Location.X + 1, card.Location.Y + 4);
+                        }
+                        if (card.Location.X > clientWidth / 2)
+                        {
+                            card.Location = new Point(card.Location.X - 1, card.Location.Y + 4);
+                        }
+                    }
+                }
+                else
+                {
+                    timerMove.Stop();
+                }
+            };
+            timerMove.Start();
+        }
+
         public void StartGame()
         {
             

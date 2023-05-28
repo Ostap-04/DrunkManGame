@@ -80,12 +80,12 @@ namespace DrunkManGame
             int diffY = y - card.Location.Y;
             timerMove.Tick += (object sender, EventArgs e) =>
             {
-                if (card.Location.Y != y)
+                if (card.Location.Y >= 10 && card.Location.Y <= this.ClientSize.Height - Card.cardHeight - 10)
                 {
                     if (diffY > 0)
-                        card.Location = new Point(x, card.Location.Y + 1);
+                        card.Location = new Point(x, card.Location.Y + 10);
                     else
-                        card.Location = new Point(x, card.Location.Y - 1);
+                        card.Location = new Point(x, card.Location.Y - 10);
                 }
                 else
                 {
@@ -111,7 +111,7 @@ namespace DrunkManGame
 
         private void step_Click(object sender, EventArgs e)
         {
-           
+           game.Step(this.ClientSize.Width, this.ClientSize.Height);
         }
     }
 }
