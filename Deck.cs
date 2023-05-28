@@ -81,5 +81,10 @@ namespace DrunkManGame
         {
            return  deck.GetEnumerator();
         }
+
+        public Card this[ int index]
+        {
+            get { return deck[index]; }
+        }
     }
 }

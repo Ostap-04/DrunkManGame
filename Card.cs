@@ -18,7 +18,8 @@ namespace DrunkManGame
         public bool IsBack { get; set; } = true;
 
         public Bitmap Background { get; set; }
-
+        public static int cardWidth = 100;
+        public static int cardHeight = 250;
         public Card(string value, string suit, int priority)
         {
             Value = value;
