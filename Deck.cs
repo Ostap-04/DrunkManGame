@@ -39,14 +39,6 @@ namespace DrunkManGame
             }
         }
 
-        public void ShowDeck()
-        {
-            foreach (var card in deck)
-            {
-               
-            }
-        }
-
         public void Shuffle()
         {
             Random rng = new Random();
