@@ -19,15 +19,14 @@ namespace DrunkManGame
 
         public Bitmap Background { get; set; }
         public static int cardWidth = 100;
-        public static int cardHeight = 250;
+        public static int cardHeight = 140;
         public Card(string value, string suit, int priority)
         {
             Value = value;
             Suit = suit;
             Priority = priority;
-            Height = 250;
+            Height = 140;
             Width = 100;
-           
         }
 
         public Card(Card another)
@@ -39,9 +38,7 @@ namespace DrunkManGame
         public static void AddBackImage(Card card)
         {
             card.BackgroundImage = Card.GetCardPicture(card);
-         
             card.BackgroundImageLayout = ImageLayout.Zoom;
-
         }
         public static Dictionary<string, string> Suits = new Dictionary<string, string>()
         {
@@ -79,47 +76,6 @@ namespace DrunkManGame
             { 13, "K" },
             { 14, "A" }
         };
-
-        //public override string ToString()
-        //{
-        //    int sizeCol= 7;
-        //    int sizeRow = 5;
-
-        //    for (int i = 0; i < sizeRow; i++) {
-        //        for (int j = 0; j < sizeCol; j++)
-        //        {
-        //            if (i == 0 && j == 0 || i == sizeRow - 1 && j == sizeCol - 1)
-        //            {
-        //                Console.Write(Value);
-        //            }
-        //            else if (i == 0 || i == sizeRow - 1)
-        //            {
-        //                if (j % 2 != 0)
-        //                {
-        //                    Console.Write(' ');
-        //                }
-        //                else if (j % 2 == 0)
-        //                {
-        //                    Console.Write("#");
-        //                }    
-        //            }
-        //            else if (j == 0 || j == sizeCol - 1)
-        //            {
-        //                Console.Write("#");
-        //            }
-        //            else if (j == 3 && i == 2)
-        //            {
-        //                Console.Write(Suit);
-        //            }
-        //            else
-        //            {
-        //                Console.Write(" ");
-        //            }
-        //        }
-        //        Console.WriteLine();
-        //    }
-        //    return "";
-        //}
 
         public override string ToString()
         {
