@@ -12,7 +12,6 @@ namespace DrunkManGame
 {
     public partial class Form1 : Form
     {
-        int indexCard;
         Game game;
         int counter = 1;
         public Form1()
@@ -20,7 +19,6 @@ namespace DrunkManGame
             InitializeComponent();
             rules.Text = "lllalllalalallala";
             game = new Game(new List<Gamer> { new Gamer(gamerNameInput1.Text), new Gamer(gamerNameInput2.Text) }, cards36.Checked ? 36 : 52, (int)predictionVal.Value);
-            indexCard = game.deck.deck.Count - 1;
         }
 
         public void ShowDeck()
@@ -51,7 +49,7 @@ namespace DrunkManGame
 
         private void TimerDistirbute_Tick(object sender, EventArgs e)
         {
-            if (indexCard < 0)
+            if (counter == 53)
             {
                 TimerDistirbute.Stop();
                 game.deck.Distribute(game.gamers);  // роздаєм карти гравцям
@@ -60,16 +58,16 @@ namespace DrunkManGame
 
             int coordTop = 10;                                     
             int coordBottom = this.ClientSize.Height - Card.cardHeight - 10;
-           
-            if (indexCard % 2 == 0)
+
+            if (counter <= 26 )
             {
-                Move((this.ClientSize.Width - Card.cardWidth) / 2, coordTop, game.deck[indexCard]);
-                --indexCard;
+                Move((this.ClientSize.Width - Card.cardWidth) / 2, coordTop, game.deck[counter - 1]);
+                ++counter;
             }
             else
             {
-                Move((this.ClientSize.Width - Card.cardWidth) / 2, coordBottom, game.deck[indexCard]);
-                --indexCard;
+                Move((this.ClientSize.Width - Card.cardWidth) / 2, coordBottom, game.deck[counter - 1]);
+                ++counter;
             }
         }
 
@@ -80,7 +78,7 @@ namespace DrunkManGame
             int diffY = y - card.Location.Y;
             timerMove.Tick += (object sender, EventArgs e) =>
             {
-                if (card.Location.Y >= 10 && card.Location.Y <= this.ClientSize.Height - Card.cardHeight - 10)
+                if (card.Location.Y >= 50 && card.Location.Y <= this.ClientSize.Height - Card.cardHeight - 50)
                 {
                     if (diffY > 0)
                         card.Location = new Point(x, card.Location.Y + 10);

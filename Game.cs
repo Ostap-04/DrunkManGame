@@ -30,6 +30,10 @@ namespace DrunkManGame
         }
         public bool Step(int clientWidth, int clientHeight)
         {
+            //foreach (Card card in gamers[0].Set)
+            //{
+            //    MessageBox.Show($"X: {card.Location.X}, Y: {card.Location.Y}");
+            //}
             count++;
             if (gamers.Count == 1)
             {
@@ -46,7 +50,7 @@ namespace DrunkManGame
                     stepSet.Add(tempCard);
                 }
                 StepMove(stepSet, clientWidth, clientHeight);
-                
+
 
 
                 Card MaxCard = GetCardWithHighestPrior(stepSet);
@@ -78,30 +82,64 @@ namespace DrunkManGame
                 RemoveEmptyPlayers(gamers);
             }
             return gameEnded;
+            //return true;
         }
 
         private void StepMove(List<Card> cards, int clientWidth, int clientHeight)
         {
             Timer timerMove = new Timer();
             timerMove.Interval = 14;
+            //cards[0].BringToFront();
             timerMove.Tick += (object sender, EventArgs e) =>
             {
-                foreach(Card card in cards)
+                foreach (Card card in cards)
                 {
+                    //cards[1].bringtofront();
                     if (card.Location.Y > clientHeight / 2 - card.Height / 2)
                     {
-                        card.Location = new Point(card.Location.X + 1, card.Location.Y - 4);
+                        card.Location = new Point(card.Location.X + 1, card.Location.Y - 2);
                     }
                     else if (card.Location.Y < clientHeight / 2 - card.Height / 2)
                     {
-                        card.Location = new Point(card.Location.X - 1, card.Location.Y + 4);
+                        card.Location = new Point(card.Location.X - 1, card.Location.Y + 2);
                     }
                     else if (card.Location.Y < (clientHeight + card.Height) / 2 && card.Location.Y > (clientHeight - card.Height) / 2)
                     {
-                        //timerMove.Stop();
+                        timerMove.Stop();
                     }
                 }
-                
+            };
+
+            //timerMove.Tick += (object sender, EventArgs e) =>
+            //{
+            //    if (cards[0].Location.Y > clientHeight / 2 - cards[0].Height / 2)
+            //    {
+            //        cards[0].Location = new Point(cards[0].Location.X + 1, cards[0].Location.Y - 4);
+            //    }
+            //    else if (cards[0].Location.Y < clientHeight / 2 - cards[0].Height / 2)
+            //    {
+            //        cards[0].Location = new Point(cards[0].Location.X - 1, cards[0].Location.Y + 4);
+            //    }
+            //    else if (cards[0].Location.Y < (clientHeight + cards[0].Height) / 2 && cards[0].Location.Y > (clientHeight - cards[0].Height) / 2)
+            //    {
+            //        timerMove.Stop();
+            //    }
+            //};
+
+            timerMove.Tick += (object sender, EventArgs e) =>
+            {
+                if (cards[1].Location.Y > clientHeight / 2 - cards[1].Height / 2)
+                {
+                    cards[1].Location = new Point(cards[1].Location.X + 1, cards[1].Location.Y - 4);
+                }
+                else if (cards[1].Location.Y < clientHeight / 2 - cards[1].Height / 2)
+                {
+                    cards[1].Location = new Point(cards[1].Location.X - 1, cards[1].Location.Y + 4);
+                }
+                else if (cards[1].Location.Y < (clientHeight + cards[1].Height) / 2 && cards[1].Location.Y > (clientHeight - cards[1].Height) / 2)
+                {
+                    timerMove.Stop();
+                }
             };
             timerMove.Start();
         }
