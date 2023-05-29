@@ -55,30 +55,30 @@ namespace DrunkManGame
 
 
 
-                Card MaxCard = GetCardWithHighestPrior(stepSet);
-                Card MinCard = GetCardWithLowestPrior(stepSet);
-                List<Card> sameCards = GetEqualCard(stepSet);
+                //Card MaxCard = GetCardWithHighestPrior(stepSet);
+                //Card MinCard = GetCardWithLowestPrior(stepSet);
+                //List<Card> sameCards = GetEqualCard(stepSet);
 
-                if (MinCard.Priority == lowestPrior && MaxCard.Priority == 14)
-                {
-                    Gamer stepWinner = gamers[stepSet.FindIndex(card => card == MinCard)];
-                    foreach (Card card in stepSet)
-                        stepWinner.Set.Insert(0, card);
-                    //EndMove(stepSet, clientWidth, clientHeight);
-                }
-                else if (sameCards.Count != 0 && sameCards.Contains(MaxCard))
-                {
-                    List<Gamer> warriors = GetUsersWithSameCards(gamers, sameCards.Max(), stepSet);
-                    War(warriors, stepSet, lowestPrior);
-                }
-                else
-                {
-                    Gamer stepWinner = gamers[stepSet.FindIndex(card => card == MaxCard)];
-                    foreach (Card card in stepSet)
-                        stepWinner.Set.Insert(0, card);
+                //if (MinCard.Priority == lowestPrior && MaxCard.Priority == 14)
+                //{
+                //    Gamer stepWinner = gamers[stepSet.FindIndex(card => card == MinCard)];
+                //    foreach (Card card in stepSet)
+                //        stepWinner.Set.Insert(0, card);
+                //    //EndMove(stepSet, clientWidth, clientHeight);
+                //}
+                //else if (sameCards.Count != 0 && sameCards.Contains(MaxCard))
+                //{
+                //    List<Gamer> warriors = GetUsersWithSameCards(gamers, sameCards.Max(), stepSet);
+                //    War(warriors, stepSet, lowestPrior);
+                //}
+                //else
+                //{
+                //    Gamer stepWinner = gamers[stepSet.FindIndex(card => card == MaxCard)];
+                //    foreach (Card card in stepSet)
+                //        stepWinner.Set.Insert(0, card);
 
-                    //EndMove(stepSet, MaxCard, clientWidth, clientHeight);
-                }
+                //    //EndMove(stepSet, MaxCard, clientWidth, clientHeight);
+                //}
             }
             else
             {
@@ -128,17 +128,59 @@ namespace DrunkManGame
                 {
                     foreach(Card card in cards)
                     {
-                        if (card.Location.X < clientWidth / 2)
+                        if (card.Location.X < clientWidth / 2 - card.Width/2)
                         {
-                            card.Location = new Point(card.Location.X + 1, card.Location.Y - 4);
+                            //if (card.Location.X != clientWidth / 2 - card.Width / 2 - 1)
+                            //    card.Location = new Point(card.Location.X + 1, card.Location.Y);
+                            //else if(card.Location.Y > 10)
+                            //    card.Location = new Point(card.Location.X, card.Location.Y - 1);
+                            //else if (card.Location.Y == 10)
+                            //{
+                            //    card.Location = new Point(card.Location.X, card.Location.Y - 1);
+                            //    card.IsBack= true;
+                            //    Card.AddBackImage(card);
+                            //}
+                            if (card.Location.Y > 10)
+                                card.Location = new Point(card.Location.X, card.Location.Y - 1);
+                            else if(card.Location.Y == 10)
+                            {
+                                card.Location = new Point(card.Location.X, card.Location.Y - 1);
+                                card.IsBack = true;
+                                Card.AddBackImage(card);
+                            }
+                            else
+                                card.Location = new Point(card.Location.X + 1, card.Location.Y);
+
+                            //card.Location = new Point(card.Location.X + 1, card.Location.Y - 2);
                         }
-                        if (card.Location.X > clientWidth / 2)
+                        if (card.Location.X > clientWidth / 2 - card.Width/2)
                         {
-                            card.Location = new Point(card.Location.X - 1, card.Location.Y - 4);
+                            if (card.Location.Y > 10)
+                                card.Location = new Point(card.Location.X, card.Location.Y - 1);
+                            else if (card.Location.Y == 10)
+                            {
+                                card.Location = new Point(card.Location.X, card.Location.Y - 1);
+                                card.IsBack = true;
+                                Card.AddBackImage(card);
+                            }
+                            else
+                                card.Location = new Point(card.Location.X - 1, card.Location.Y);
+                            //if (card.Location.X != clientWidth / 2 - card.Width / 2 - 1)
+                            //    card.Location = new Point(card.Location.X - 1, card.Location.Y);
+                            //else if (card.Location.Y > 10)
+                            //    card.Location = new Point(card.Location.X, card.Location.Y - 1);
+                            //else if (card.Location.Y == 10)
+                            //{
+                            //    card.Location = new Point(card.Location.X, card.Location.Y - 1);
+                            //    card.IsBack = true;
+                            //    Card.AddBackImage(card);
+                            //}
                         }
-                        else
-                        {
-                        }
+                        //if (card.Location.Y < 10 || card.Location.Y > clientHeight - Card.cardHeight - 10)
+                        //{
+                        //    myTimer.Stop();
+
+                        //}
                     }
                 }
                 else if (maxCard.Location.X > clientWidth / 2)
@@ -147,19 +189,19 @@ namespace DrunkManGame
                     {
                         if (card.Location.X < clientWidth / 2)
                         {
-                            card.Location = new Point(card.Location.X + 1, card.Location.Y + 4);
+                            card.Location = new Point(card.Location.X + 1, card.Location.Y + 2);
                         }
                         if (card.Location.X > clientWidth / 2)
                         {
-                            card.Location = new Point(card.Location.X - 1, card.Location.Y + 4);
+                            card.Location = new Point(card.Location.X - 1, card.Location.Y + 2);
                         }
                         else { }
                     }
                 }
-                else
-                {
-                    myTimer.Stop();
-                }
+                //else
+                //{
+                //    myTimer.Stop();
+                //}
             };
             myTimer.Start();
         }

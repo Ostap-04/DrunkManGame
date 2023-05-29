@@ -78,12 +78,12 @@ namespace DrunkManGame
             int diffY = y - card.Location.Y;
             timerMove.Tick += (object sender, EventArgs e) =>
             {
-                if (card.Location.Y >= 50 && card.Location.Y <= this.ClientSize.Height - Card.cardHeight - 50)
+                if (card.Location.Y >= 10 && card.Location.Y <= this.ClientSize.Height - Card.cardHeight - 10)
                 {
                     if (diffY > 0)
-                        card.Location = new Point(x, card.Location.Y + 10);
+                        card.Location = new Point(x, card.Location.Y + 4);
                     else
-                        card.Location = new Point(x, card.Location.Y - 10);
+                        card.Location = new Point(x, card.Location.Y - 4);
                 }
                 else
                 {
