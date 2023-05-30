@@ -126,77 +126,77 @@ namespace DrunkManGame
             {
                 if (maxCard.Location.X < clientWidth / 2)
                 {
-                    foreach(Card card in cards)
-                    {
-                        if (card.Location.X < clientWidth / 2 - card.Width/2)
-                        {
-                            //if (card.Location.X != clientWidth / 2 - card.Width / 2 - 1)
-                            //    card.Location = new Point(card.Location.X + 1, card.Location.Y);
-                            //else if(card.Location.Y > 10)
-                            //    card.Location = new Point(card.Location.X, card.Location.Y - 1);
-                            //else if (card.Location.Y == 10)
-                            //{
-                            //    card.Location = new Point(card.Location.X, card.Location.Y - 1);
-                            //    card.IsBack= true;
-                            //    Card.AddBackImage(card);
-                            //}
-                            if (card.Location.Y > 10)
-                                card.Location = new Point(card.Location.X, card.Location.Y - 1);
-                            else if(card.Location.Y == 10)
-                            {
-                                card.Location = new Point(card.Location.X, card.Location.Y - 1);
-                                card.IsBack = true;
-                                Card.AddBackImage(card);
-                            }
-                            else
-                                card.Location = new Point(card.Location.X + 1, card.Location.Y);
-
-                            //card.Location = new Point(card.Location.X + 1, card.Location.Y - 2);
-                        }
-                        if (card.Location.X > clientWidth / 2 - card.Width/2)
-                        {
-                            if (card.Location.Y > 10)
-                                card.Location = new Point(card.Location.X, card.Location.Y - 1);
-                            else if (card.Location.Y == 10)
-                            {
-                                card.Location = new Point(card.Location.X, card.Location.Y - 1);
-                                card.IsBack = true;
-                                Card.AddBackImage(card);
-                            }
-                            else
-                                card.Location = new Point(card.Location.X - 1, card.Location.Y);
-                            //if (card.Location.X != clientWidth / 2 - card.Width / 2 - 1)
-                            //    card.Location = new Point(card.Location.X - 1, card.Location.Y);
-                            //else if (card.Location.Y > 10)
-                            //    card.Location = new Point(card.Location.X, card.Location.Y - 1);
-                            //else if (card.Location.Y == 10)
-                            //{
-                            //    card.Location = new Point(card.Location.X, card.Location.Y - 1);
-                            //    card.IsBack = true;
-                            //    Card.AddBackImage(card);
-                            //}
-                        }
-                        //if (card.Location.Y < 10 || card.Location.Y > clientHeight - Card.cardHeight - 10)
-                        //{
-                        //    myTimer.Stop();
-
-                        //}
-                    }
-                }
-                else if (maxCard.Location.X > clientWidth / 2)
-                {
                     foreach (Card card in cards)
                     {
-                        if (card.Location.X < clientWidth / 2)
+                        if (card.Location.X < clientWidth / 2 - card.Width / 2)
                         {
-                            card.Location = new Point(card.Location.X + 1, card.Location.Y + 2);
+                            card.Location = new Point(card.Location.X + 1, card.Location.Y - 2);
                         }
-                        if (card.Location.X > clientWidth / 2)
+                        else if (card.Location.X > clientWidth / 2 - card.Width / 2)
                         {
-                            card.Location = new Point(card.Location.X - 1, card.Location.Y + 2);
+                            card.Location = new Point(card.Location.X - 1, card.Location.Y - 2);
                         }
-                        else { }
+                        else
+                        {
+                            myTimer.Stop();
+                        }
                     }
+
+                }
+                else
+                {
+                    //foreach (Card card in cards)
+                    //{
+                    //    //if (card.Location.X != clientWidth / 2 && card.Location.Y != clientHeight - card.Height - 10)
+
+                    //    if (card.Location.X < clientWidth / 2)
+                    //    {
+                    //        //Console.WriteLine(card.Location.X.ToString());
+                    //        card.Location = new Point(card.Location.X + 1, card.Location.Y + 2);
+                    //    }
+                    //    else if (card.Location.X > clientWidth / 2)
+                    //    {
+                    //        //Console.WriteLine(card.Location.X.ToString());
+                    //        card.Location = new Point(card.Location.X - 1, card.Location.Y + 2);
+                    //    }
+                    //    else
+                    //    {
+                    //        myTimer.Stop();
+                    //    }
+                    //}
+                    if (cards[0].Location.X > 375 && cards[0].Location.X < 400)
+                    {
+                        cards[0].Location = new Point(clientWidth / 2 - cards[0].Width / 2, clientHeight - Card.cardHeight - 10);
+                        myTimer.Stop();
+                    }
+                    if (cards[0].Location.X < clientWidth / 2)
+                    {
+                        //Console.WriteLine(card.Location.X.ToString());
+                        cards[0].Location = new Point(cards[0].Location.X + 1, cards[0].Location.Y + 2);
+                    }
+                    else if (cards[0].Location.X > clientWidth / 2)
+                    {
+                        //Console.WriteLine(card.Location.X.ToString());
+                        cards[0].Location = new Point(cards[0].Location.X - 1, cards[0].Location.Y + 2);
+                    }
+                    else
+                    {
+                        myTimer.Stop();
+                    }
+                    //if (cards[1].Location.X < clientWidth / 2 - cards[1].Width / 2)
+                    //{
+                    //    //Console.WriteLine(card.Location.X.ToString());
+                    //    cards[1].Location = new Point(cards[1].Location.X + 1, cards[1].Location.Y + 2);
+                    //}
+                    //else if (cards[1].Location.X > clientWidth / 2 - cards[1].Width / 2)
+                    //{
+                    //    //Console.WriteLine(card.Location.X.ToString());
+                    //    cards[1].Location = new Point(cards[1].Location.X - 1, cards[1].Location.Y + 2);
+                    //}
+                    //else
+                    //{
+                    //    myTimer.Stop();
+                    //}
                 }
                 //else
                 //{

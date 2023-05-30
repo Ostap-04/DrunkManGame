@@ -119,7 +119,7 @@
             // 
             this.start.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.start.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.start.Location = new System.Drawing.Point(566, 637);
+            this.start.Location = new System.Drawing.Point(102, 576);
             this.start.Name = "start";
             this.start.Size = new System.Drawing.Size(144, 50);
             this.start.TabIndex = 7;
