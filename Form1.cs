@@ -13,12 +13,11 @@ namespace DrunkManGame
     public partial class Form1 : Form
     {
         Game game;
-        int counter = 1;
+        int counter;
         public Form1()
         {
             InitializeComponent();
             rules.Text = "lllalllalalallala";
-            game = new Game(new List<Gamer> { new Gamer(gamerNameInput1.Text), new Gamer(gamerNameInput2.Text) }, cards52.Checked ? 52 : 36, (int)predictionVal.Value);
         }
 
         public void ShowDeck()
@@ -33,6 +32,12 @@ namespace DrunkManGame
             }
         }
 
+        private void HandleCardsAmount()
+        {
+            nickname1.Text = $"Гравець {game.gamers[0].Name}: {game.gamers[0].Set.Count}";
+            nickname2.Text = $"Гравець {game.gamers[1].Name}: {game.gamers[1].Set.Count}";
+        }
+
         private void btnDistribute_Click(object sender, EventArgs e)
         {
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -41,6 +46,7 @@ namespace DrunkManGame
 
             TimerDistirbute.Enabled = true;
             TimerDistirbute.Start();
+
             btnDistribute.Visible = false;
             btnDistribute.Enabled = false;
             step.Visible = true;
@@ -49,25 +55,26 @@ namespace DrunkManGame
 
         private void TimerDistirbute_Tick(object sender, EventArgs e)
         {
-            if (counter == 37)
+            if (counter == 0)
             {
                 TimerDistirbute.Stop();
                 game.deck.Distribute(game.gamers);  // роздаєм карти гравцям
+                HandleCardsAmount();
                 return;
             }
 
             int coordTop = 10;                                     
             int coordBottom = this.ClientSize.Height - Card.cardHeight - 10;
 
-            if (counter <= 18 )
+            if (counter > game.deckSize/2)
             {
                 Move((this.ClientSize.Width - Card.cardWidth) / 2, coordTop, game.deck[counter - 1]);
-                ++counter;
+                --counter;
             }
             else
             {
                 Move((this.ClientSize.Width - Card.cardWidth) / 2, coordBottom, game.deck[counter - 1]);
-                ++counter;
+                --counter;
             }
         }
 
@@ -95,6 +102,9 @@ namespace DrunkManGame
 
         private void start_Click(object sender, EventArgs e)
         {
+            game = new Game(new List<Gamer> { new Gamer(gamerNameInput1.Text), new Gamer(gamerNameInput2.Text) }, cards52.Checked ? 52 : 36, (int)predictionVal.Value);
+            game.MyEvent += HandleCardsAmount;
+            counter = game.deckSize;
             ShowDeck();
             btnDistribute.Visible = true;
             gameSettings.Visible = false;
@@ -109,7 +119,21 @@ namespace DrunkManGame
 
         private void step_Click(object sender, EventArgs e)
         {
-           game.Step(this.ClientSize.Width, this.ClientSize.Height);
+            if ( game.count < (int)predictionVal.Value)
+            {
+                foreach(Gamer g in game.gamers)
+                {
+                    for (int i = 0; i < g.Set.Count; i++)
+                        Console.WriteLine($"{i}: X: {g.Set[i].Location.X}, Y: {g.Set[i].Location.Y}");
+
+                        Console.WriteLine();
+                }
+               game.Step(this.ClientSize.Width, this.ClientSize.Height);
+            }
+            else
+            {
+                MessageBox.Show("Гра не закінчилась за передбачену кількість кроків");
+            }
         }
     }
 }

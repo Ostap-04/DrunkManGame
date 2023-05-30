@@ -10,15 +10,18 @@ using System.Windows.Forms;
 
 namespace DrunkManGame
 {
+   
     public class Game
     {
+        public event Action MyEvent;
+
         public List<Gamer> gamers;
         public Deck deck;
         public int deckSize;
         public int stepsPrediction;
         int lowestPrior;
-        int count = 0;  // лічильник ходів
         bool gameEnded = false;
+        public int count = 0;
         Timer myTimer;
         List<Card> stepSet = new List<Card>();
         int ClientWidthMain;
@@ -61,9 +64,6 @@ namespace DrunkManGame
                 Card MinCard = GetCardWithLowestPrior(stepSet);
                 List<Card> sameCards = GetEqualCard(stepSet);
 
-
-               
-
                 if (MinCard.Priority == lowestPrior && MaxCard.Priority == 14)
                 {
                     Gamer stepWinner = gamers[stepSet.FindIndex(card => card == MinCard)];
@@ -74,6 +74,8 @@ namespace DrunkManGame
                 else if (sameCards.Count != 0 && sameCards.Contains(MaxCard))
                 {
                     List<Gamer> warriors = GetUsersWithSameCards(gamers, sameCards.Max(), stepSet);
+                    //List<Gamer> warriors = gamers;
+
                     //WarMove(stepSet, MaxCard, clientWidth, clientHeight);
                     War(warriors, stepSet, lowestPrior);
 
@@ -100,6 +102,7 @@ namespace DrunkManGame
 
             foreach(Card card in cards)
             {
+                card.BringToFront();
                 myTimer.Tick += (object sender, EventArgs e) =>
                 {
                     if (card.Location.Y > clientHeight / 2 - card.Height / 2)
@@ -155,9 +158,10 @@ namespace DrunkManGame
         {
             myTimer = new Timer();
             myTimer.Interval = 7;
-            cards[0].BringToFront();
+            //cards[0].BringToFront();
             foreach (Card card in cards)
             {
+                card.BringToFront();
                 myTimer.Tick += (object sender, EventArgs e) =>
                 {
                     if (card.Location.Y > clientHeight / 2 - card.Height / 2)
@@ -178,7 +182,12 @@ namespace DrunkManGame
                         }
                         else
                         {
-                            StepMove(new List<Card>() { stepSet[6 * WarCounter], stepSet[7 * WarCounter] }, GetCardWithHighestPrior(stepSet), clientWidth, clientHeight);
+                            Card maxCard = stepSet.GetRange(6, 2).Max();
+                            Card minCard = stepSet.GetRange(6, 2).Min();
+                            if (minCard.Priority == lowestPrior && maxCard.Priority == 14)
+                                StepMove(new List<Card>() { stepSet[6 * WarCounter], stepSet[7 * WarCounter] }, minCard, clientWidth, clientHeight);
+                            else
+                                StepMove(new List<Card>() { stepSet[6 * WarCounter], stepSet[7 * WarCounter] }, maxCard, clientWidth, clientHeight);
                         }
                         //CardMove(stepSet, ClientWidthMain, ClientHeightMain, );
                     }
@@ -217,6 +226,8 @@ namespace DrunkManGame
                         }
                         else
                         {
+                            MyEvent.Invoke();
+                            ChangeLocation();
                             myTimer.Stop();
                         }
                     }
@@ -236,6 +247,8 @@ namespace DrunkManGame
                         }
                         else
                         {
+                            MyEvent.Invoke();
+                            ChangeLocation();
                             myTimer.Stop();
                         }
                     }
@@ -417,7 +430,6 @@ namespace DrunkManGame
                     foreach (Card card in stepset)
                         warWinner.Set.Insert(0, card);
                     //StepMove(stepSet, minCard, ClientWidthMain, ClientHeightMain);
-
                     break;
                 }
                 else
@@ -429,6 +441,14 @@ namespace DrunkManGame
                     break;
                 }
             }
+        }
+
+        public void ChangeLocation()
+        {
+            foreach(Card card in gamers[0].Set)
+                card.Location = new Point(card.Location.X, gamers[0].Set[gamers[0].Set.Count - 1].Location.Y);
+            foreach (Card card in gamers[1].Set)
+                card.Location = new Point(card.Location.X, gamers[1].Set[gamers[1].Set.Count - 1].Location.Y);
         }
     }
 }
