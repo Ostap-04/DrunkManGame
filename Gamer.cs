@@ -38,6 +38,7 @@ namespace DrunkManGame
             Card returnCard = Set[Set.Count - 1];
             returnCard.IsBack = false;
             Set.Remove(returnCard);
+            Card.AddBackImage(returnCard);
             return returnCard;
         }
 

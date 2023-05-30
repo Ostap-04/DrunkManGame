@@ -18,7 +18,7 @@ namespace DrunkManGame
         {
             InitializeComponent();
             rules.Text = "lllalllalalallala";
-            game = new Game(new List<Gamer> { new Gamer(gamerNameInput1.Text), new Gamer(gamerNameInput2.Text) }, cards36.Checked ? 36 : 52, (int)predictionVal.Value);
+            game = new Game(new List<Gamer> { new Gamer(gamerNameInput1.Text), new Gamer(gamerNameInput2.Text) }, cards52.Checked ? 52 : 36, (int)predictionVal.Value);
         }
 
         public void ShowDeck()
@@ -49,7 +49,7 @@ namespace DrunkManGame
 
         private void TimerDistirbute_Tick(object sender, EventArgs e)
         {
-            if (counter == 53)
+            if (counter == 37)
             {
                 TimerDistirbute.Stop();
                 game.deck.Distribute(game.gamers);  // роздаєм карти гравцям
@@ -59,7 +59,7 @@ namespace DrunkManGame
             int coordTop = 10;                                     
             int coordBottom = this.ClientSize.Height - Card.cardHeight - 10;
 
-            if (counter <= 26 )
+            if (counter <= 18 )
             {
                 Move((this.ClientSize.Width - Card.cardWidth) / 2, coordTop, game.deck[counter - 1]);
                 ++counter;
