@@ -14,6 +14,8 @@ namespace DrunkManGame
     public class Game
     {
         public event Action MyEvent;
+        public event Action StepBtnEvent;
+
 
         public List<Gamer> gamers;
         public Deck deck;
@@ -63,6 +65,8 @@ namespace DrunkManGame
                 Card MaxCard = GetCardWithHighestPrior(stepSet);
                 Card MinCard = GetCardWithLowestPrior(stepSet);
                 List<Card> sameCards = GetEqualCard(stepSet);
+
+                MyEvent.Invoke();
 
                 if (MinCard.Priority == lowestPrior && MaxCard.Priority == 14)
                 {
@@ -227,10 +231,12 @@ namespace DrunkManGame
                         else
                         {
                             MyEvent.Invoke();
+                            StepBtnEvent.Invoke();
                             ChangeLocation();
                             myTimer.Stop();
                         }
                     }
+                    
 
                 }
                 else
@@ -248,6 +254,7 @@ namespace DrunkManGame
                         else
                         {
                             MyEvent.Invoke();
+                            StepBtnEvent.Invoke();
                             ChangeLocation();
                             myTimer.Stop();
                         }
@@ -406,10 +413,11 @@ namespace DrunkManGame
                         stepset.Add(warrior.GiveCard());
                     }  
                 }
+                MyEvent.Invoke();
                 WarMove(stepset.GetRange(0, 2), ClientWidthMain, ClientHeightMain);
 
                 List<Card> lastCards = new List<Card>();
-                for (int i = 1; i <= warriors.Count; ++i)
+                for (int i = gamers.Count; i > 0; --i)
                 {
                     lastCards.Add(stepset[stepset.Count - i]);
                 }

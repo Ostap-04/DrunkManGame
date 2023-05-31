@@ -38,6 +38,11 @@ namespace DrunkManGame
             nickname2.Text = $"Гравець {game.gamers[1].Name}: {game.gamers[1].Set.Count}";
         }
 
+        private void HandleStepBtn()
+        {
+            step.Enabled = true;
+        }
+
         private void btnDistribute_Click(object sender, EventArgs e)
         {
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -49,8 +54,8 @@ namespace DrunkManGame
 
             btnDistribute.Visible = false;
             btnDistribute.Enabled = false;
-            step.Visible = true;
-            step.Enabled = true;
+            step.Visible = false;
+            step.Enabled = false;
         }
 
         private void TimerDistirbute_Tick(object sender, EventArgs e)
@@ -60,6 +65,8 @@ namespace DrunkManGame
                 TimerDistirbute.Stop();
                 game.deck.Distribute(game.gamers);  // роздаєм карти гравцям
                 HandleCardsAmount();
+                step.Visible = true;
+                step.Enabled = true;
                 return;
             }
 
@@ -104,6 +111,7 @@ namespace DrunkManGame
         {
             game = new Game(new List<Gamer> { new Gamer(gamerNameInput1.Text), new Gamer(gamerNameInput2.Text) }, cards52.Checked ? 52 : 36, (int)predictionVal.Value);
             game.MyEvent += HandleCardsAmount;
+            game.StepBtnEvent += HandleStepBtn;
             counter = game.deckSize;
             ShowDeck();
             btnDistribute.Visible = true;
@@ -119,6 +127,7 @@ namespace DrunkManGame
 
         private void step_Click(object sender, EventArgs e)
         {
+            step.Enabled = false;
             if ( game.count < (int)predictionVal.Value)
             {
                 foreach(Gamer g in game.gamers)
@@ -135,5 +144,6 @@ namespace DrunkManGame
                 MessageBox.Show("Гра не закінчилась за передбачену кількість кроків");
             }
         }
+        
     }
 }
