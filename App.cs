@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,12 +15,14 @@ namespace DrunkManGame
     {
         Game game;
         int counter;
+        SoundPlayer music = new SoundPlayer(@"..\..\..\music\music.wav");
         public App()
         {
             InitializeComponent();
-            rules.Text = "У грі в п'яницю карточна колода роздається порівну двом гравцям. Далі вони відкривають по одній верхній карті, і той, чия карта старша, забирає собі обидві відкриті карти, які кладуться під низ його колоди. Той, хто залишається без карт - програє.\r\nДля простоти будемо вважати, що усі карти різні по номіналу, а також, що наймолодша карта перемагає найстаршу карту (\"шестірка бере туза« – для 36 карт).\r\n";
+            rules.Text = "Колоду перемішують, карти роздають порівну обом гравцям, які тримають карти стопкою сорочкою догори. \r\nХід гри: кожен гравець бере одну карту з верху своєї стопки і кладе на стіл лицем догори – це здача. Хто поклав найстаршу незалежно від масті карту, той забирає всю здачу і кладе її під низ своєї стопки. Якщо в здачі є більше ніж одна найстарша карта, наприклад, два королі, то між власниками цих карт виникає «війна»: вони повинні викласти по три карти, і переможе той, чия третя карта старша. Якщо в одній здачі є туз і наймолодша карта колоди (шістка чи двійка), то перемагає наймолодша.\r\n Гравець, який позбувся всіх карт, програє. Виграє той, хто забрав усі карти.\r\n";
             rules.SelectAll();
             rules.SelectionAlignment = HorizontalAlignment.Center;
+            //music.Play();
         }
 
         public void ShowDeck()
@@ -58,6 +61,7 @@ namespace DrunkManGame
             btnDistribute.Enabled = false;
             step.Visible = false;
             step.Enabled = false;
+           
         }
 
         private void TimerDistirbute_Tick(object sender, EventArgs e)
@@ -125,8 +129,9 @@ namespace DrunkManGame
             nickname2.Visible = true;
             nickname1.Text += " " + gamerNameInput1.Text;
             nickname2.Text += " " + gamerNameInput2.Text;
-            this.BackgroundImage = null;
-          
+            rulesText.Visible = false;
+
+
         }
 
         private void step_Click(object sender, EventArgs e)
@@ -144,5 +149,16 @@ namespace DrunkManGame
              }
         }
 
+        private void cards36_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cards36.Checked == true) cards36.ForeColor = Color.DarkRed;
+            else cards36.ForeColor = Color.White;
+        }
+
+        private void cards52_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cards52.Checked == true) cards52.ForeColor = Color.DarkRed;
+            else cards52.ForeColor = Color.White;
+        }
     }
 }

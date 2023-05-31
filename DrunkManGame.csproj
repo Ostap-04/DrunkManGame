@@ -248,5 +248,8 @@
   <ItemGroup>
     <None Include="Resources\queen_of_spades.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="music\music.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
