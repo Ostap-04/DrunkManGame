@@ -333,7 +333,7 @@
             this.Controls.Add(this.btnDistribute);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "App";
-            this.Text = "Моделювання корткової  гри \"П\'яниця\"";
+            this.Text = "Моделювання карткової  гри \"П\'яниця\"";
             this.gameSettings.ResumeLayout(false);
             this.gameSettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.predictionVal)).EndInit();
