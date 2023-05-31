@@ -4,21 +4,29 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace DrunkManGame
 {
-    public class Card : IComparable
+    public class Card : PictureBox, IComparable
     {
         public string Value { get; set; }
         public string Suit { get; set; }
         public int Priority { get; set; }
+
         public bool IsBack { get; set; } = true;
+
+        public Bitmap Background { get; set; }
+        public static int cardWidth = 100;
+        public static int cardHeight = 140;
 
         public Card(string value, string suit, int priority)
         {
             Value = value;
             Suit = suit;
             Priority = priority;
+            Height = 140;
+            Width = 100;
         }
 
         public Card(Card another)
@@ -27,7 +35,11 @@ namespace DrunkManGame
             Suit = another.Suit;
             Priority = another.Priority;
         }
-
+        public static void AddBackImage(Card card)
+        {
+            card.BackgroundImage = Card.GetCardPicture(card);
+            card.BackgroundImageLayout = ImageLayout.Zoom;
+        }
         public static Dictionary<string, string> Suits = new Dictionary<string, string>()
         {
             { "spades", "♠" },
@@ -65,47 +77,6 @@ namespace DrunkManGame
             { 14, "A" }
         };
 
-        //public override string ToString()
-        //{
-        //    int sizeCol= 7;
-        //    int sizeRow = 5;
-
-        //    for (int i = 0; i < sizeRow; i++) {
-        //        for (int j = 0; j < sizeCol; j++)
-        //        {
-        //            if (i == 0 && j == 0 || i == sizeRow - 1 && j == sizeCol - 1)
-        //            {
-        //                Console.Write(Value);
-        //            }
-        //            else if (i == 0 || i == sizeRow - 1)
-        //            {
-        //                if (j % 2 != 0)
-        //                {
-        //                    Console.Write(' ');
-        //                }
-        //                else if (j % 2 == 0)
-        //                {
-        //                    Console.Write("#");
-        //                }    
-        //            }
-        //            else if (j == 0 || j == sizeCol - 1)
-        //            {
-        //                Console.Write("#");
-        //            }
-        //            else if (j == 3 && i == 2)
-        //            {
-        //                Console.Write(Suit);
-        //            }
-        //            else
-        //            {
-        //                Console.Write(" ");
-        //            }
-        //        }
-        //        Console.WriteLine();
-        //    }
-        //    return "";
-        //}
-
         public override string ToString()
         {
             return $"{Value} {Suit} {Priority}";
@@ -129,11 +100,6 @@ namespace DrunkManGame
             if (card.IsBack)
                 return Properties.Resources.Back;
             return Resources.cardPics[new KeyValuePair<string, string>(card.Value, card.Suit)];
-        }
-
-        public static Bitmap GetCardPicture(string val, string suit)
-        {
-            return Resources.cardPics[new KeyValuePair<string, string>(val, suit)];
         }
     }
 

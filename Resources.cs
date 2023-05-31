@@ -11,7 +11,6 @@ namespace DrunkManGame
     {
         internal static Dictionary<KeyValuePair<string, string>, Bitmap> cardPics = new Dictionary<KeyValuePair<string, string>, Bitmap>() {
             {new KeyValuePair<string, string>(Card.Values52[2], Card.Suits["spades"]), Properties.Resources._2_of_spades},
-            {new KeyValuePair<string, string>(Card.Values52[2], Card.Suits["spades"]), Properties.Resources._2_of_spades},
             {new KeyValuePair<string, string>(Card.Values52[3], Card.Suits["spades"]), Properties.Resources._3_of_spades},
             {new KeyValuePair<string, string>(Card.Values52[4], Card.Suits["spades"]), Properties.Resources._4_of_spades},
             {new KeyValuePair<string, string>(Card.Values52[5], Card.Suits["spades"]), Properties.Resources._5_of_spades},

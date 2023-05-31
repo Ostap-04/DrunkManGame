@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace DrunkManGame
 {
-    public class Deck
+    public class Deck : IEnumerable
     {
         public List<Card> deck;
         public Deck(int size)
@@ -15,11 +17,12 @@ namespace DrunkManGame
 
             if (size == 36)
             {
-                foreach (var valKey in Card.Values36.Keys)
+                foreach (int valKey in Card.Values36.Keys)
                 {
-                    foreach (var suitKey in Card.Suits.Keys)
+                    foreach (string suitKey in Card.Suits.Keys)
                     {
-                        deck.Add(new Card(Card.Values36[valKey], Card.Suits[suitKey], valKey));
+                        deck.Add(new Card(Card.Values36[valKey], Card.Suits[suitKey], valKey) );
+                        Card.AddBackImage(deck.Last());
                     }
                 }
             }
@@ -30,16 +33,9 @@ namespace DrunkManGame
                     foreach (var suitKey in Card.Suits.Keys)
                     {
                         deck.Add(new Card(Card.Values52[valKey], Card.Suits[suitKey], valKey));
+                        Card.AddBackImage(deck.Last());
                     }
                 }
-            }
-        }
-
-        public void PrintDeck()
-        {
-            foreach (var card in deck)
-            {
-                Console.WriteLine(card);
             }
         }
 
@@ -68,10 +64,18 @@ namespace DrunkManGame
                     userDeck.Add(deck[deck.Count - 1]);
                     deck.RemoveAt(deck.Count - 1);
                 }
-
                 gamer.Set = userDeck;
             }
         }
 
+        public IEnumerator GetEnumerator()
+        {
+           return  deck.GetEnumerator();
+        }
+
+        public Card this[ int index]
+        {
+            get { return deck[index]; }
+        }
     }
 }

@@ -21,16 +21,12 @@ namespace DrunkManGame
             Name = another.Name;
             Status = another.Status;
             foreach (Card card in another.Set)
-            {
                 Set.Add(new Card(card));
-            }
         }
         public void WriteUserSet()
         {
             foreach (var setItem in Set)
-            {
                 Console.WriteLine(setItem);
-            }
         }
 
         public Card GiveCard()
@@ -38,6 +34,7 @@ namespace DrunkManGame
             Card returnCard = Set[Set.Count - 1];
             returnCard.IsBack = false;
             Set.Remove(returnCard);
+            Card.AddBackImage(returnCard);
             return returnCard;
         }
 
@@ -55,6 +52,5 @@ namespace DrunkManGame
                 Console.Write($"{card}; ");
             return "";
         }
-
     }
 }
