@@ -173,6 +173,7 @@ namespace DrunkManGame
         private void EndMove(List<Card> cards, Card maxCard, int clientWidth, int clientHeight)
         {
             myTimer = new Timer();
+            //myTimer.Interval = 500; якщо треба затормозити 
             int counter = 0;
             
             myTimer.Tick += (object sender, EventArgs e) =>
@@ -354,7 +355,6 @@ namespace DrunkManGame
                 {
                     foreach (var warrior in warriors)
                     {
-                        Console.WriteLine($"{warrior.Name} set count: {warrior.Set.Count}");
                         stepset.Add(warrior.GiveCard());
                     }  
                 }

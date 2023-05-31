@@ -10,14 +10,16 @@ using System.Windows.Forms;
 
 namespace DrunkManGame
 {
-    public partial class Form1 : Form
+    public partial class App : Form
     {
         Game game;
         int counter;
-        public Form1()
+        public App()
         {
             InitializeComponent();
-            rules.Text = "lllalllalalallala";
+            rules.Text = "У грі в п'яницю карточна колода роздається порівну двом гравцям. Далі вони відкривають по одній верхній карті, і той, чия карта старша, забирає собі обидві відкриті карти, які кладуться під низ його колоди. Той, хто залишається без карт - програє.\r\nДля простоти будемо вважати, що усі карти різні по номіналу, а також, що наймолодша карта перемагає найстаршу карту (\"шестірка бере туза« – для 36 карт).\r\n";
+            rules.SelectAll();
+            rules.SelectionAlignment = HorizontalAlignment.Center;
         }
 
         public void ShowDeck()
@@ -123,24 +125,24 @@ namespace DrunkManGame
             nickname2.Visible = true;
             nickname1.Text += " " + gamerNameInput1.Text;
             nickname2.Text += " " + gamerNameInput2.Text;
+            this.BackgroundImage = null;
+          
         }
 
         private void step_Click(object sender, EventArgs e)
         {
+
             step.Enabled = false;
-            if ( game.count < (int)predictionVal.Value)
+            if (game.count < (int)predictionVal.Value)
             {
-                foreach(Gamer g in game.gamers)
-                {
-                    for (int i = 0; i < g.Set.Count; i++)
-                        Console.WriteLine($"{i}: X: {g.Set[i].Location.X}, Y: {g.Set[i].Location.Y}");
-                        Console.WriteLine();
-                }
-               game.Step(this.ClientSize.Width, this.ClientSize.Height);
+                game.Step(this.ClientSize.Width, this.ClientSize.Height);
             }
             else
-                MessageBox.Show("Гра не закінчилась за передбачену кількість кроків");
+            {
+                MessageBox.Show("Гра не закінчилась за передбачену кількість кроків", "Кінець!", MessageBoxButtons.OK);
+                
+             }
         }
-        
+
     }
 }
