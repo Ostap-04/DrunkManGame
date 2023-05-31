@@ -101,13 +101,6 @@ namespace DrunkManGame
                 return Properties.Resources.Back;
             return Resources.cardPics[new KeyValuePair<string, string>(card.Value, card.Suit)];
         }
-
-        //public static Bitmap GetCardPicture(string val, string suit)
-        //{
-        //    if (IsBack)
-        //        return Properties.Resources.Back;
-        //    return Resources.cardPics[new KeyValuePair<string, string>(val, suit)];
-        //}
     }
 
 }

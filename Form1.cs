@@ -134,15 +134,12 @@ namespace DrunkManGame
                 {
                     for (int i = 0; i < g.Set.Count; i++)
                         Console.WriteLine($"{i}: X: {g.Set[i].Location.X}, Y: {g.Set[i].Location.Y}");
-
                         Console.WriteLine();
                 }
                game.Step(this.ClientSize.Width, this.ClientSize.Height);
             }
             else
-            {
                 MessageBox.Show("Гра не закінчилась за передбачену кількість кроків");
-            }
         }
         
     }

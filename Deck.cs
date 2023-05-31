@@ -64,7 +64,6 @@ namespace DrunkManGame
                     userDeck.Add(deck[deck.Count - 1]);
                     deck.RemoveAt(deck.Count - 1);
                 }
-
                 gamer.Set = userDeck;
             }
         }
