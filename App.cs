@@ -15,7 +15,7 @@ namespace DrunkManGame
     {
         Game game;
         int counter;
-        SoundPlayer music = new SoundPlayer(@"C:\Users\111\university\university-sem4\c#\labs\cardsWF\music\music.wav");
+        SoundPlayer music = new SoundPlayer(@"..\..\music\music.wav");
         public App()
         {
             InitializeComponent();
