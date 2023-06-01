@@ -100,9 +100,9 @@ namespace DrunkManGame
                 myTimer.Tick += (object sender, EventArgs e) =>
                 {
                     if (card.Location.Y > clientHeight / 2 - card.Height / 2)
-                        card.Location = new Point(card.Location.X + 1, card.Location.Y - 2);
+                        card.Location = new Point(card.Location.X + 2, card.Location.Y - 4);
                     else if (card.Location.Y < clientHeight / 2 - card.Height / 2)
-                        card.Location = new Point(card.Location.X - 1, card.Location.Y + 2);
+                        card.Location = new Point(card.Location.X - 2, card.Location.Y + 4);
                     else
                     {
                         myTimer.Stop();
@@ -123,9 +123,9 @@ namespace DrunkManGame
                 myTimer.Tick += (object sender, EventArgs e) =>
                 {
                     if (card.Location.Y > clientHeight / 2 - card.Height / 2)
-                        card.Location = new Point(card.Location.X + 1, card.Location.Y - 2);
+                        card.Location = new Point(card.Location.X + 2, card.Location.Y - 4);
                     else if (card.Location.Y < clientHeight / 2 - card.Height / 2)
-                        card.Location = new Point(card.Location.X - 1, card.Location.Y + 2);
+                        card.Location = new Point(card.Location.X - 2, card.Location.Y + 4);
                     else
                     {
                         myTimer.Stop();
@@ -147,9 +147,9 @@ namespace DrunkManGame
                 myTimer.Tick += (object sender, EventArgs e) =>
                 {
                     if (card.Location.Y > clientHeight / 2 - card.Height / 2)
-                        card.Location = new Point(card.Location.X + 1, card.Location.Y - 2);
+                        card.Location = new Point(card.Location.X + 1, card.Location.Y - 4);
                     else if (card.Location.Y < clientHeight / 2 - card.Height / 2)
-                        card.Location = new Point(card.Location.X - 1, card.Location.Y + 2);
+                        card.Location = new Point(card.Location.X - 1, card.Location.Y + 4);
                     else
                     {
                         myTimer.Stop();
@@ -190,9 +190,9 @@ namespace DrunkManGame
                     foreach (Card card in cards)
                     {
                         if (card.Location.X < clientWidth / 2 - card.Width / 2)
-                            card.Location = new Point(card.Location.X + 1, card.Location.Y - 2);
+                            card.Location = new Point(card.Location.X + 2, card.Location.Y - 4);
                         else if (card.Location.X > clientWidth / 2 - card.Width / 2)
-                            card.Location = new Point(card.Location.X - 1, card.Location.Y - 2);
+                            card.Location = new Point(card.Location.X - 2, card.Location.Y - 4);
                         else
                         {
                             MyEvent.Invoke();
@@ -207,9 +207,9 @@ namespace DrunkManGame
                     foreach (Card card in cards)
                     {
                         if (card.Location.X < clientWidth / 2 - card.Width / 2)
-                            card.Location = new Point(card.Location.X + 1, card.Location.Y + 2);
+                            card.Location = new Point(card.Location.X + 2, card.Location.Y + 4);
                         else if (card.Location.X > clientWidth / 2 - card.Width / 2)
-                            card.Location = new Point(card.Location.X - 1, card.Location.Y + 2);
+                            card.Location = new Point(card.Location.X - 2, card.Location.Y + 4);
                         else
                         {
                             MyEvent.Invoke();
@@ -221,52 +221,6 @@ namespace DrunkManGame
                 }
             };
             myTimer.Start();
-        }
-
-        public void StartGame()
-        {
-            while (count < stepsPrediction)
-            {
-                count++;
-                if (gamers.Count == 1)
-                {
-                    Console.WriteLine($"Winner: {gamers[0].Name}");
-                    gameEnded = true;
-                    break;
-                }
-                if (PlayersNotEmpty(gamers) && gamers.Count > 1)
-                {
-                    stepSet.Clear();
-                    foreach (Gamer gamer in gamers)
-                        stepSet.Add(gamer.GiveCard());
-
-                    Card MaxCard = GetCardWithHighestPrior(stepSet);
-                    Card MinCard = GetCardWithLowestPrior(stepSet);
-                    List<Card> sameCards = GetEqualCard(stepSet);
-
-                    if (MinCard.Priority == lowestPrior && MaxCard.Priority == 14)
-                    {
-                        Gamer stepWinner = gamers[stepSet.FindIndex(card => card == MinCard)];
-                        foreach (Card card in stepSet)
-                            stepWinner.Set.Insert(0, card);
-                    }
-                    else if (sameCards.Count != 0 && sameCards.Contains(MaxCard))
-                    {
-                        List<Gamer> warriors = GetUsersWithSameCards(gamers, sameCards.Max(), stepSet);
-                        War(warriors, stepSet, lowestPrior);
-                    }
-                    else
-                    {
-                        Gamer stepWinner = gamers[stepSet.FindIndex(card => card == MaxCard)];
-                        foreach (Card card in stepSet)
-                            stepWinner.Set.Insert(0, card);
-                    }
-                }
-                else
-                    RemoveEmptyPlayers(gamers);
-            }
-            if (!gameEnded)
-                Console.WriteLine("Гра не закінчилась за {0}", stepsPrediction); // to change bool flag
         }
 
         private bool PlayersNotEmpty(List<Gamer> gamers)
@@ -287,19 +241,10 @@ namespace DrunkManGame
             }
         }
 
-        private int Factorial(int n)
-        {
-            int result = 1;
-            for (int i = n; i > 0; i--)
-                result *= i;
-            return result;
-        }
-
         private List<Card> GetEqualCard(List<Card> stepcards)
         {
             List<Card> equalsCards = new List<Card>();
             int count = stepcards.Count;
-            int checkCount = Factorial(count) / Factorial(2) * Factorial(count - 2);
             int iterCount = 0;
             for (int i = 0; i < count; i++)   // ідем по картах
             {

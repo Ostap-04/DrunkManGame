@@ -15,14 +15,14 @@ namespace DrunkManGame
     {
         Game game;
         int counter;
-        SoundPlayer music = new SoundPlayer(@"..\..\..\music\music.wav");
+        SoundPlayer music = new SoundPlayer(@"C:\Users\111\university\university-sem4\c#\labs\cardsWF\music\music.wav");
         public App()
         {
             InitializeComponent();
             rules.Text = "Колоду перемішують, карти роздають порівну обом гравцям, які тримають карти стопкою сорочкою догори. \r\nХід гри: кожен гравець бере одну карту з верху своєї стопки і кладе на стіл лицем догори – це здача. Хто поклав найстаршу незалежно від масті карту, той забирає всю здачу і кладе її під низ своєї стопки. Якщо в здачі є більше ніж одна найстарша карта, наприклад, два королі, то між власниками цих карт виникає «війна»: вони повинні викласти по три карти, і переможе той, чия третя карта старша. Якщо в одній здачі є туз і наймолодша карта колоди (шістка чи двійка), то перемагає наймолодша.\r\n Гравець, який позбувся всіх карт, програє. Виграє той, хто забрав усі карти.\r\n";
             rules.SelectAll();
             rules.SelectionAlignment = HorizontalAlignment.Center;
-            //music.Play();
+            music.Play();
         }
 
         public void ShowDeck()
