@@ -15,12 +15,12 @@ namespace DrunkManGame
     {
         Game game;
         int counter;
-        SoundPlayer music = new SoundPlayer(@"..\..\..\music\music.wav");
+        SoundPlayer music = new SoundPlayer(@"..\..\music\music.wav");
         public App()
         {
             InitializeComponent();
             rules.Text = "Колоду перемішують, карти роздають порівну обом гравцям, які тримають карти стопкою сорочкою догори. \r\nХід гри: кожен гравець бере одну карту з верху своєї стопки і кладе на стіл лицем догори – це здача. Хто поклав найстаршу незалежно від масті карту, той забирає всю здачу і кладе її під низ своєї стопки. Якщо в здачі є більше ніж одна найстарша карта, наприклад, два королі, то між власниками цих карт виникає «війна»: вони повинні викласти по три карти, і переможе той, чия третя карта старша. Якщо в одній здачі є туз і наймолодша карта колоди (шістка чи двійка), то перемагає наймолодша.\r\n Гравець, який позбувся всіх карт, програє. Виграє той, хто забрав усі карти.\r\n";
-            rules.SelectAll();
+            rules.Select(0,0);
             rules.SelectionAlignment = HorizontalAlignment.Center;
             music.Play();
         }
@@ -120,33 +120,25 @@ namespace DrunkManGame
             game.StepBtnEvent += HandleStepBtn;
             counter = game.deckSize;
             ShowDeck();
-            btnDistribute.Visible = true;
-            gameSettings.Visible = false;
-            rules.Visible = false;
-            start.Visible = false;
-            gameTitle.Visible = false;
-            nickname1.Visible = true;
-            nickname2.Visible = true;
             nickname1.Text += " " + gamerNameInput1.Text;
             nickname2.Text += " " + gamerNameInput2.Text;
-            rulesText.Visible = false;
-
-
+            toggleState();
+            btnDistribute.Enabled = true;
         }
 
         private void step_Click(object sender, EventArgs e)
         {
-
             step.Enabled = false;
             if (game.count < (int)predictionVal.Value)
             {
                 game.Step(this.ClientSize.Width, this.ClientSize.Height);
             }
             else
-            {
+            { 
                 MessageBox.Show("Гра не закінчилась за передбачену кількість кроків", "Кінець!", MessageBoxButtons.OK);
-                
-             }
+                toggleState();
+                EndSession();
+            }
         }
 
         private void cards36_CheckedChanged(object sender, EventArgs e)
@@ -159,6 +151,38 @@ namespace DrunkManGame
         {
             if (cards52.Checked == true) cards52.ForeColor = Color.DarkRed;
             else cards52.ForeColor = Color.White;
+        }
+
+        private void toggleState() 
+        {
+            btnDistribute.Visible = !btnDistribute.Visible;
+            gameSettings.Visible = !gameSettings.Visible;
+            rules.Visible = !rules.Visible;
+            start.Visible = !start.Visible;
+            gameTitle.Visible = !gameTitle.Visible;
+            nickname1.Visible = !nickname1.Visible;
+            nickname2.Visible = !nickname2.Visible;
+            rulesText.Visible = !rulesText.Visible;
+        }
+
+        private void EndSession()
+        {
+            step.Visible = false;
+            btnDistribute.Visible = false;
+            for (int i = Controls.Count - 1; i >= 0; i--)
+            {
+                if (Controls[i] is Card)
+                {
+                    Controls.RemoveAt(i);
+                }
+            }
+            nickname1.Text = "Гравець";
+            nickname2.Text = "Гравець";
+            gamerNameInput1.Text = "";
+            gamerNameInput2.Text = "";
+            cards36.Checked = false;
+            cards52.Checked = false;
+            predictionVal.Value = 0;
         }
     }
 }
