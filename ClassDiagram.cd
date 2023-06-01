@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DrunkManGame.App">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAiAAJAAKIRgAAgQgCgEQACEAAgAAGIQAEEkAIQAUA=</HashCode>
+      <FileName>App.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DrunkManGame.Card">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAICAABABAEABAQEAAAAAAAAQAAAQAAAAAAwAAAAAiA=</HashCode>
+      <FileName>Card.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DrunkManGame.Deck">
+    <Position X="4.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAACAAAAAAAAAAAAEAAAAAAAAAAkAA=</HashCode>
+      <FileName>Deck.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DrunkManGame.Game">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EIMEAAAAEghQAAAABAAgAAQAAQCAAGABIAARRCAAKAA=</HashCode>
+      <FileName>Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DrunkManGame.Gamer">
+    <Position X="4.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAUAAAABAAEAAAgAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Gamer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DrunkManGame.Resources">
+    <Position X="0.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Resources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
