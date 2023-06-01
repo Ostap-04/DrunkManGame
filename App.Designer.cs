@@ -62,7 +62,7 @@
             this.btnDistribute.Font = new System.Drawing.Font("Showcard Gothic", 15.75F, System.Drawing.FontStyle.Bold);
             this.btnDistribute.ForeColor = System.Drawing.Color.Cornsilk;
             this.btnDistribute.Location = new System.Drawing.Point(1088, 639);
-            this.btnDistribute.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDistribute.Margin = new System.Windows.Forms.Padding(4);
             this.btnDistribute.Name = "btnDistribute";
             this.btnDistribute.Size = new System.Drawing.Size(184, 50);
             this.btnDistribute.TabIndex = 0;
@@ -249,10 +249,10 @@
             this.step.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.step.Font = new System.Drawing.Font("Showcard Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.step.ForeColor = System.Drawing.Color.Cornsilk;
-            this.step.Location = new System.Drawing.Point(1128, 639);
+            this.step.Location = new System.Drawing.Point(1088, 639);
             this.step.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.step.Name = "step";
-            this.step.Size = new System.Drawing.Size(144, 50);
+            this.step.Size = new System.Drawing.Size(184, 50);
             this.step.TabIndex = 11;
             this.step.Text = "Крок";
             this.step.UseVisualStyleBackColor = false;
@@ -293,7 +293,7 @@
             this.gameTitle.BackColor = System.Drawing.Color.Transparent;
             this.gameTitle.Image = ((System.Drawing.Image)(resources.GetObject("gameTitle.Image")));
             this.gameTitle.Location = new System.Drawing.Point(375, 43);
-            this.gameTitle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gameTitle.Margin = new System.Windows.Forms.Padding(4);
             this.gameTitle.Name = "gameTitle";
             this.gameTitle.Size = new System.Drawing.Size(604, 59);
             this.gameTitle.TabIndex = 17;
@@ -329,9 +329,9 @@
             this.Controls.Add(this.start);
             this.Controls.Add(this.btnDistribute);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "App";
-            this.Text = "Моделювання корткової  гри \"П\'яниця\"";
+            this.Text = "Моделювання кaрткової  гри \"П\'яниця\"";
             this.gameSettings.ResumeLayout(false);
             this.gameSettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.predictionVal)).EndInit();

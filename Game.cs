@@ -147,9 +147,9 @@ namespace DrunkManGame
                 myTimer.Tick += (object sender, EventArgs e) =>
                 {
                     if (card.Location.Y > clientHeight / 2 - card.Height / 2)
-                        card.Location = new Point(card.Location.X + 1, card.Location.Y - 4);
+                        card.Location = new Point(card.Location.X + 2, card.Location.Y - 4);
                     else if (card.Location.Y < clientHeight / 2 - card.Height / 2)
-                        card.Location = new Point(card.Location.X - 1, card.Location.Y + 4);
+                        card.Location = new Point(card.Location.X - 2, card.Location.Y + 4);
                     else
                     {
                         myTimer.Stop();
